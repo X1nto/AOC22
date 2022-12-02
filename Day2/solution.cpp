@@ -5,19 +5,19 @@
 #include <vector>
 #include <map>
 
-enum letter {
+enum struct letter {
 	AX,
 	BY,
 	CZ
 };
 
-enum shape {
+enum struct shape {
 	rock = 1,
 	paper = 2,
 	scissors = 3,
 };
 
-enum result {
+enum struct result {
 	loss = 0,
 	draw = 3,
 	win = 6,
@@ -55,11 +55,11 @@ shape get_shape_for_letter(letter& letter)
 {
 	switch (letter)
 	{
-	case AX:
+	case letter::AX:
 		return shape::rock;
-	case BY:
+	case letter::BY:
 		return shape::paper;
-	case CZ:
+	case letter::CZ:
 		return shape::scissors;
 	}
 }
@@ -68,11 +68,11 @@ result get_result_for_letter(letter& letter)
 {
 	switch (letter)
 	{
-	case AX:
+	case letter::AX:
 		return result::loss;
-	case BY:
+	case letter::BY:
 		return result::draw;
-	case CZ:
+	case letter::CZ:
 		return result::win;
 	}
 };
@@ -92,20 +92,20 @@ result get_round_result(shape& opponent, shape& you)
 
 shape get_shape_for_result_comply(shape& opponent, result& desired)
 {
-	if (desired == result::win)
+	switch (desired)
 	{
+	case result::win:
 		return loss_map[opponent];
-	} else if (desired == result::loss)
-	{
+	case result::loss:
 		return win_map[opponent];
-	} else {
+	case result::draw:
 		return opponent;
 	}
 }
 
 int get_round_score(shape opponent, shape you) {
 	result round_result = get_round_result(opponent, you);
-	return you + round_result;
+	return static_cast<int>(you) + static_cast<int>(round_result);
 }
 
 int main()
