@@ -85,8 +85,7 @@ class Day5 : public Runner<std::string, std::string>
 
 	std::string part1() override
 	{
-		numbered_crates p1crates;
-		p1crates.insert(ncrates.begin(), ncrates.end());
+		numbered_crates p1crates = get_copied_numbered_crates();
 
 		for (move& move : moves)
 		{
@@ -103,8 +102,7 @@ class Day5 : public Runner<std::string, std::string>
 
 	std::string part2() override
 	{
-		numbered_crates p2crates;
-		p2crates.insert(ncrates.begin(), ncrates.end());
+		numbered_crates p2crates = get_copied_numbered_crates();
 
 		for (move& move : moves)
 		{
@@ -127,6 +125,15 @@ class Day5 : public Runner<std::string, std::string>
 		}
 
 		return on_top;
+	}
+
+	numbered_crates get_copied_numbered_crates()
+	{
+		//the copy constructor of std::map is not working
+		//so we have to use the iterator with insert instead
+		numbered_crates c_ncrates;
+		c_ncrates.insert(ncrates.begin(), ncrates.end());
+		return c_ncrates;
 	}
 };
 

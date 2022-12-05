@@ -64,7 +64,6 @@ private:
 		return value_string.str();
 	}
 
-
 public:
 	void run()
 	{
