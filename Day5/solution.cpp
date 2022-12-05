@@ -16,7 +16,6 @@ class Day5 : public Runner<std::string, std::string>
 	using numbered_crates = std::map<int, std::vector<char>>;
 
 	numbered_crates ncrates;
-	
 	std::vector<move> moves;
 
 	void load() override
